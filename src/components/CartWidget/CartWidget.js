@@ -1,12 +1,17 @@
 import React from 'react'
 
-function CartWidget(props) {
+function CartWidget () {
+    
     return (
         <div>
-            <img src={props.imagen} alt="LogoTrent" width="40" height="40" className="d-inline-block align-text-top"/>
+            <h1>
+                soy cart
+            </h1>
+
         </div>
     )
   
 }
 
 export default CartWidget
+

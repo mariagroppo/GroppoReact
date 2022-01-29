@@ -1,8 +1,7 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
 import { task } from '../../DatosProductos';
-/* import Item from './Item'; */
-import ItemList from './ItemList';
+import ItemList from '../ItemList/ItemList';
 
 export default function ContenedorProductos () {
     const [productos, setProductos]=useState([]);
@@ -23,3 +22,4 @@ export default function ContenedorProductos () {
         </div>
     )
 }
+
