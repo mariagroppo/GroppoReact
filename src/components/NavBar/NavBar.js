@@ -3,10 +3,6 @@ import logo from '../img/trentLogo.png'
 import carrito from '../img/carrito-de-supermercado.png'
 import {Link} from 'react-router-dom'
 
-{/* <li className="nav-item dropdown">
-  <CartWidget imagen={carrito} />
-</li> */}
-
 const NavBar = () => {
     
     return (

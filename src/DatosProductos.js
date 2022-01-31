@@ -19,19 +19,21 @@ const productos = [
     {id: '6', categoria: 'Pack', name:"Pack Canchero 24U", price: 3100, photo: Foto6, alterna:"Pack Canchero", stock:1000, detail:"Pack para compartir."},
     {id: '7', categoria: 'Pack', name:"Pack Fiestero 48U", price: 6000, photo: Foto7, alterna:"Pack Fiestero", stock:1000, detail:"Pack para compartir."},
     {id: '8', categoria: 'Pack', name:"Pack Lupuladas 6U", price: 990, photo: Foto8, alterna:"Pack lupuladas", stock:1000, detail:"Pack para degustar y compartir."},
-    {id: '9', categoria: 'Lata', name:"Lata Cream Stout", price: 170, photo: Foto9, alterna:"Cream Stout", stock:1000, detail:"Cerveza con un remolino de tostado, café (resultado de un cold brew de granos Brasil Catuai), chocolate amargo y leves notas dulces (gracias a un sutil agregado de lactosa) que se mezclan en un equilibrio intenso pero muy fácil de tomar."},
-    {id: '10', categoria: 'Lata', name:"Lata Equinox", price: 190, photo: Foto10, alterna:"Equinox", stock:1000, detail:"Se caracteriza por su perfil marcado de lúpulo Equinox.Este interesante lúpulo americano puesto al mercado en 2015, ofrece notas de fruta tropical como el Maracuyá y pero también de pimienta verde."},
-    {id: '11', categoria: 'Lata', name:"Lata Weisse", price: 190, photo: Foto11, alterna:"Weisse", stock:1000, detail:"Cerveza tipo Belgian Witbier con trigo de cremosidad característica. En su aroma predomina la cáscara de naranja y el coriandro. Una cerveza de una complejidad en aromas que resulta muy fácil de tomar por su elevada refrescancia,  bajo amargor y cuerpo liviano."},
+    {id: '9', categoria: 'Latas', name:"Lata Cream Stout", price: 170, photo: Foto9, alterna:"Cream Stout", stock:1000, detail:"Cerveza con un remolino de tostado, café (resultado de un cold brew de granos Brasil Catuai), chocolate amargo y leves notas dulces (gracias a un sutil agregado de lactosa) que se mezclan en un equilibrio intenso pero muy fácil de tomar."},
+    {id: '10', categoria: 'Latas', name:"Lata Equinox", price: 190, photo: Foto10, alterna:"Equinox", stock:1000, detail:"Se caracteriza por su perfil marcado de lúpulo Equinox.Este interesante lúpulo americano puesto al mercado en 2015, ofrece notas de fruta tropical como el Maracuyá y pero también de pimienta verde."},
+    {id: '11', categoria: 'Latas', name:"Lata Weisse", price: 190, photo: Foto11, alterna:"Weisse", stock:1000, detail:"Cerveza tipo Belgian Witbier con trigo de cremosidad característica. En su aroma predomina la cáscara de naranja y el coriandro. Una cerveza de una complejidad en aromas que resulta muy fácil de tomar por su elevada refrescancia,  bajo amargor y cuerpo liviano."},
 ];
 
-export const task = new Promise( (res,rej) => {
+export default function task () {
     let condition=true;
-    if (condition) {
-        setTimeout( ()=>{
-            res(productos)
-        }, 3000);
-        /* res(productos); */
-    } else {
-        rej('404 not found.');
+    return new Promise ( (res,rej) => {
+        if (condition) {
+            setTimeout( ()=>{
+                res(productos)
+            }, 3000);
+            /* res(productos); */
+        } else {
+            rej('404 not found.');
+        }
     }
-});
+)};
