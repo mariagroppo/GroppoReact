@@ -1,13 +1,13 @@
 import React from 'react'
-import logo from '../img/trentLogo.png'
-import carrito from '../img/carrito-de-supermercado.png'
+import logo from '../../img/trentLogo.png'
+import carrito from '../../img/carrito-de-supermercado.png'
 import {Link} from 'react-router-dom'
 
 const NavBar = () => {
     
     return (
         <div>
-            <h1 className="tituloIndex">TRENT CRAFT BEER</h1>
+            {/* <h1 className="tituloIndex">TRENT CRAFT BEER</h1> */}
             <div>
                 <div>
                   <nav className="navbar navbar-expand-md navbar-light bg-light">

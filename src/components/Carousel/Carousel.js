@@ -1,9 +1,9 @@
 import React from 'react';
-import inicio1 from '../img/inicio1.png'
-import inicio2 from '../img/inicio2.png'
-import inicio3 from '../img/inicio3.png'
-import inicio4 from '../img/inicio4.png'
-import inicio5 from '../img/inicio5.png'
+import inicio1 from '../../img/inicio1.png'
+import inicio2 from '../../img/inicio2.png'
+import inicio3 from '../../img/inicio3.png'
+import inicio4 from '../../img/inicio4.png'
+import inicio5 from '../../img/inicio5.png'
 
 export default function Carousel () {
     
@@ -11,7 +11,7 @@ export default function Carousel () {
         <div className="d-flex flex-column align-items-center">
             <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
-                    <div class="carousel-item active">
+                    <div className="carousel-item active">
                         <img src={inicio1} className="d-block w-100" alt="..."/>
                     </div>
                     <div className="carousel-item">

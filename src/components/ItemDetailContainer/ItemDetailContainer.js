@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import task from '../../DatosProductos';
+import task from '../../data/DatosProductos';
 import ItemDetail from '../ItemDetail/ItemDetail';
 
 
@@ -16,15 +16,7 @@ export default function ItemDetailContainer () {
             .then (res=> setProductos(res.find(elemento => elemento.id===idProducto)))
             .catch (err => console.log(err))
             .finally ( ()=> setLoading(false))
-
-        } else {
-            task()
-            .then (res=> setProductos(res))
-            .catch (err => console.log(err))
-            .finally ( ()=> setLoading(false))
         }
-        
-        
     }, [idProducto])
 
     return (

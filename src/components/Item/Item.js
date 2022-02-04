@@ -4,19 +4,21 @@ import ItemCount from '../ItemCount/ItemCount';
 export default function Item ( {producto} ) {
     
     let stock=producto.stock;
-
-    function onAdd (cant) {
+    
+    /* function onAdd (cant) {
         if (cant>0) {
             console.log(`Se agregan ${cant} unidades de ${producto.name} al carrito.`)
         } 
-    }
+    } */
     
     return (
         <div key={producto.id} className="card m-1">
-            <img src={producto.photo} className="card-img-top" alt={producto.alterna}/>
-            <div className="card-body">
-                <h5 className="card-title">{producto.name}</h5>
-                <p className="card-text">${producto.price}</p>
+            <div>
+                <img src={producto.photo} className="card-img-top" alt={producto.alterna}/>
+                <div className="card-body">
+                    <h5 className="card-title">{producto.name}</h5>
+                    <p className="card-text">${producto.price}</p>
+                </div>
             </div>
             {/* El producto.id se pone con bastic */}
             <Link to={ `/detailContainer/${producto.id}` }>
@@ -25,7 +27,9 @@ export default function Item ( {producto} ) {
                 </button>
             </Link>
             <br/>
-            <ItemCount stock={stock} initial={0} onAdd={onAdd}/>
+            {/* <ItemCount stock={stock} initial={0} onAdd={onAdd}/> */}
+            <ItemCount stock={producto.stock} initial={0} producto={producto}/>
+            
         </div>
 )
 }

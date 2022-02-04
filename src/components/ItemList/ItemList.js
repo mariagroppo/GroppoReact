@@ -1,7 +1,10 @@
+import React, {useContext} from 'react';
 import { Link } from "react-router-dom";
 import Item from "../Item/Item";
+import {ContextApp} from '../ContenedorProductos/ContenedorProductos'
 
-export default function ItemList ({prod}) {
+export default function ItemList () {
+    const {prods} = useContext(ContextApp);
     return (
         <div className="row d-flex flex-wrap justify-content-around">
             <div className="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
@@ -23,9 +26,11 @@ export default function ItemList ({prod}) {
                 
             </div>
             <div className="d-flex flex-wrap justify-content-around">
-                {prod.map( (producto) => <Item producto={producto}/> )}
+                {prods.map( (producto) => <Item producto={producto}/> )}
             </div>
             
         </div>
+        
+        
     )
 }
