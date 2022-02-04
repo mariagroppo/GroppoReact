@@ -4,15 +4,9 @@ import ItemCount from '../ItemCount/ItemCount';
 export default function Item ( {producto} ) {
     
     let stock=producto.stock;
-    
-    /* function onAdd (cant) {
-        if (cant>0) {
-            console.log(`Se agregan ${cant} unidades de ${producto.name} al carrito.`)
-        } 
-    } */
-    
+        
     return (
-        <div key={producto.id} className="card m-1">
+        <div key={producto.id} className="card m-1 shadow-lg">
             <div>
                 <img src={producto.photo} className="card-img-top" alt={producto.alterna}/>
                 <div className="card-body">

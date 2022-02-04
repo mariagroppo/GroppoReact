@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCartContext } from '../../context/CartContext';
+import swal from 'sweetalert';
 
 export default function ItemCount (props) {
     const [count, setCount]=useState(props.initial)
@@ -29,20 +30,24 @@ export default function ItemCount (props) {
                     if (props.producto.id === prod.id) {
                         condition=false
                     }
-                } else {
-                    console.log("Ya se encontro el producto en el array")
                 }
             })
 
             if (condition) {
-                console.log("producto NO repetido")
-                console.log(`Se agregan ${count} unidades de ${props.producto.name} al carrito.`)
+                /* console.log(`NO REPETIDO. Se agregan ${count} unidades de ${props.producto.name} al carrito.`) */
                 agregarItemAlCarrito( { ...props.producto, cantidad: count})
                 setContador(count)
                 setCount(0)
+                swal("Producto agregado al carrito.");
             } else {
-                console.log("producto repetido")
-            }
+                let index = cartList.findIndex ( prod => prod.id === props.producto.id) 
+                /* console.log("REPETIDO. Ubicación: " + index) */
+                cartList[index].cantidad = cartList[index].cantidad + count
+                setContador(count)
+                setCount(0)
+                swal("Producto ya agregado. Se sumaron " + count + " unidades al carrito.");     
+            } 
+            
         }
     } 
     

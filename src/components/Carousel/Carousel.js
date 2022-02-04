@@ -8,34 +8,37 @@ import inicio5 from '../../img/inicio5.png'
 export default function Carousel () {
     
     return (
-        <div className="d-flex flex-column align-items-center">
-            <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-                <div className="carousel-inner">
-                    <div className="carousel-item active">
-                        <img src={inicio1} className="d-block w-100" alt="..."/>
+        <div className="align-items-center my-5">
+
+            <div className="d-flex flex-column align-items-center">
+                <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+                    <div className="carousel-inner">
+                        <div className="carousel-item active">
+                            <img src={inicio1} className="d-block w-100" alt="..."/>
+                        </div>
+                        <div className="carousel-item">
+                            <img src={inicio2} className="d-block w-100" alt="..."/>
+                        </div>
+                        <div className="carousel-item">
+                            <img src={inicio3} className="d-block w-100" alt="..."/>
+                        </div>
+                        <div className="carousel-item">
+                            <img src={inicio4} className="d-block w-100" alt="..."/>
+                        </div>
+                        <div className="carousel-item">
+                            <img src={inicio5} className="d-block w-100" alt="..."/>
+                        </div>
                     </div>
-                    <div className="carousel-item">
-                        <img src={inicio2} className="d-block w-100" alt="..."/>
-                    </div>
-                    <div className="carousel-item">
-                        <img src={inicio3} className="d-block w-100" alt="..."/>
-                    </div>
-                    <div className="carousel-item">
-                        <img src={inicio4} className="d-block w-100" alt="..."/>
-                    </div>
-                    <div className="carousel-item">
-                        <img src={inicio5} className="d-block w-100" alt="..."/>
-                    </div>
+                    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Previous</span>
+                    </button>
+                    <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Next</span>
+                    </button>
                 </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Previous</span>
-                </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Next</span>
-                </button>
             </div>
-    </div>
+        </div>
     )
 }

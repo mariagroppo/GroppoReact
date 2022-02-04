@@ -1,19 +1,15 @@
 import React from 'react';
 
-export default function CartItem(props) {
-    let subTotal = parseInt(props.producto.cantidad)*parseFloat(props.producto.price)
-    
+export default function CartItem({producto}) {
+    let subTotal = producto.cantidad * producto.price
     return (
-    <div>
-        <tbody className="table">
-            <tr>
-                <th>{props.producto.cantidad}</th>
-                <td>{props.producto.name}</td>
-                <td>${props.producto.price}</td>
-                <td> - Sub-total: ${subTotal}</td>
-            </tr>                
-        </tbody>
+        <tr>
+            <th scope="row">{producto.id}</th>
+            <td>{producto.name}</td>
+            <td>{producto.cantidad}</td>
+            <td>{producto.price}</td>
+            <td>{subTotal}</td>
+        </tr>
         
-    </div>
-  )
+    );
 }

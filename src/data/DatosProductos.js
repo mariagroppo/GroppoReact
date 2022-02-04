@@ -6,7 +6,7 @@ export default function task () {
         if (condition) {
             setTimeout( ()=>{
                 res(productos)
-            }, 3000);
+            }, 2000);
         } else {
             rej('404 not found.');
             

@@ -9,12 +9,7 @@ export default function CartContextProvider({children}) {
     const [cartList, setCartList] = useState([]);
 
     function agregarItemAlCarrito(item) {
-        console.log(item)
         setCartList( [...cartList, item])
-        /* setCartList(cartList.push({item})) */
-        console.log("   cart list de context")
-        console.log(cartList)
-        
     }
 
     return <cartContext.Provider value={{
