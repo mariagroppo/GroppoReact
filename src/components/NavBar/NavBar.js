@@ -1,7 +1,7 @@
 import React from 'react'
 import logo from '../../img/trentLogo.png'
-import carrito from '../../img/carrito-de-supermercado.png'
 import {Link} from 'react-router-dom'
+import CartElements from '../CartElements/CartElements';
 
 const NavBar = () => {
     
@@ -9,27 +9,27 @@ const NavBar = () => {
         <div>
             <div>
                 <div>
-                  <nav class="navbar navbar-expand-sm navbar-light bg-light">
-                    <div class="container-fluid">
+                  <nav className="navbar navbar-expand-sm navbar-light bg-light">
+                    <div className="container-fluid">
                         <Link to='/'>
                           <img src={logo} alt="LogoTrent" width="100" height="50" className="d-inline-block align-text-top"/>
                         </Link>
-                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
                       </button>
-                      <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
+                      <div className="collapse navbar-collapse" id="navbarNav">
+                        <ul className="navbar-nav">
                             <Link to="/productos" className="nav-link">
                                 Productos
                             </Link>
-                            <li class="nav-item">
-                              <a class="nav-link" href="mediosDePago.html">Medios de pago</a>
+                            <li className="nav-item">
+                              <a className="nav-link" href="mediosDePago.html">Medios de pago</a>
                             </li>
-                            <li class="nav-item">
-                              <a class="nav-link" href="contacto.html">Contacto</a>
+                            <li className="nav-item">
+                              <a className="nav-link" href="contacto.html">Contacto</a>
                             </li>
                             <Link to='/cart'>
-                                <img src={carrito} alt="LogoTrent" width="40" height="40" className="d-inline-block align-text-top mx-3"/>
+                                <CartElements/>
                             </Link>
                         </ul>
                       </div>

@@ -3,8 +3,6 @@ import ItemCount from '../ItemCount/ItemCount';
 
 export default function Item ( {producto} ) {
     
-    let stock=producto.stock;
-        
     return (
         <div key={producto.id} className="card m-1 shadow-lg">
             <div>

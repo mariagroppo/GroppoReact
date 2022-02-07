@@ -12,9 +12,15 @@ export default function CartContextProvider({children}) {
         setCartList( [...cartList, item])
     }
 
+    function vaciarCarrito () {
+        setCartList([]);
+    }
+
+    
     return <cartContext.Provider value={{
         cartList,
-        agregarItemAlCarrito
+        agregarItemAlCarrito,
+        vaciarCarrito        
     }} >
             {children}
         </cartContext.Provider>;
