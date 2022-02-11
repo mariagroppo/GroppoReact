@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useCartContext } from '../../context/CartContext';
 
 export default function CartItem({producto}) {
     let subTotal = producto.cantidad * producto.price
+    const {removeItem} = useCartContext();
     
     return (
         <tr>
@@ -12,11 +13,9 @@ export default function CartItem({producto}) {
             <td>{producto.price}</td>
             <td>{subTotal}</td>
             <td>
-                <Link to="/productos">
-                    <button type="button" className="btn btn-danger btn-sm m-2">
-                        X
-                    </button>
-                </Link>
+                <button type="button" className="btn btn-danger btn-sm m-2" onClick={()=>removeItem(producto.id)}>
+                    X
+                </button>
             </td>
         </tr>
         

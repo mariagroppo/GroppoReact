@@ -16,11 +16,18 @@ export default function CartContextProvider({children}) {
         setCartList([]);
     }
 
+    function removeItem (id) {
+        const index = cartList.findIndex(item => item.id === id)
+        if (index>=0) {
+            setCartList(cartList.filter((item => item.id !== id)))
+        }
+    }
     
     return <cartContext.Provider value={{
         cartList,
         agregarItemAlCarrito,
-        vaciarCarrito        
+        vaciarCarrito,
+        removeItem        
     }} >
             {children}
         </cartContext.Provider>;
