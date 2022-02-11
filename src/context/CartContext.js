@@ -1,4 +1,5 @@
 import { createContext, useState, useContext} from "react";
+import swal from 'sweetalert';
 
 const cartContext = createContext([]);
 
@@ -9,7 +10,27 @@ export default function CartContextProvider({children}) {
     const [cartList, setCartList] = useState([]);
 
     function agregarItemAlCarrito(item) {
-        setCartList( [...cartList, item])
+                
+        let condition = true;
+        cartList.forEach ( (prod) => {
+            if (condition) {
+                if (item.id === prod.id) {
+                    condition=false
+                }
+            }
+        })
+        
+        if (condition) {
+            /* console.log(`NO REPETIDO. Se agregan ${count} unidades de ${props.producto.name} al carrito.`) */
+            setCartList( [...cartList, item])
+            swal("Producto agregado al carrito.")
+            
+        } else {
+            let index = cartList.findIndex ( prod => prod.id === item.id) 
+            /* console.log("REPETIDO. Ubicación: " + index) */
+            cartList[index].cantidad = cartList[index].cantidad + item.cantidad
+            swal("Producto ya agregado. Se sumaron " + item.cantidad + " unidades al carrito.");     
+        } 
     }
 
     function vaciarCarrito () {

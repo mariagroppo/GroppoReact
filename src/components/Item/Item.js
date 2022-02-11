@@ -19,7 +19,6 @@ export default function Item ( {producto} ) {
                 </button>
             </Link>
             <br/>
-            {/* <ItemCount stock={stock} initial={0} onAdd={onAdd}/> */}
             <ItemCount stock={producto.stock} initial={0} producto={producto}/>
             
         </div>

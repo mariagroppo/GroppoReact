@@ -33,8 +33,7 @@ export default function ItemDetail ( {producto}) {
                             Volver al listado
                         </button>
                     </Link>
-                    {/* <ItemCount stock={producto.stock} initial={0} onAdd={onAdd}/> */}
-                    <ItemCount stock={producto.stock} initial={0} producto={producto}/>
+                   <ItemCount stock={producto.stock} initial={0} producto={producto}/>
                 </div>
             </div>
         </div>
