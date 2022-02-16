@@ -2,6 +2,7 @@ import { productos } from './Productos'
 
 export default function task () {
     let condition=true;
+    
     return new Promise ( (res,rej) => {
         if (condition) {
             setTimeout( ()=>{

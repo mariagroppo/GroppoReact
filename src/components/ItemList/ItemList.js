@@ -26,7 +26,7 @@ export default function ItemList () {
                 
             </div>
             <div className="d-flex flex-wrap justify-content-around">
-                {prods.map( (producto) => <Item producto={producto}/> )}
+                {prods.map( (product) => <Item product={product}/> )}
             </div>
             
         </div>

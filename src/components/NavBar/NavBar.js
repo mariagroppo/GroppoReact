@@ -1,7 +1,7 @@
 import React from 'react'
 import logo from '../../img/trentLogo.png'
 import {Link} from 'react-router-dom'
-import CartElements from '../CartElements/CartElements';
+import CartWidget from '../CartWidget/CartWidget';
 
 const NavBar = () => {
     
@@ -29,7 +29,7 @@ const NavBar = () => {
                               <a className="nav-link" href="contacto.html">Contacto</a>
                             </li>
                             <Link to='/cart'>
-                                <CartElements/>
+                                <CartWidget/>
                             </Link>
                         </ul>
                       </div>

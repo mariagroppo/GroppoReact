@@ -1,19 +1,19 @@
 import React from 'react';
 import { useCartContext } from '../../context/CartContext';
 
-export default function CartItem({producto}) {
-    let subTotal = producto.cantidad * producto.price
+export default function CartItem({product}) {
+    let subTotal = product.quantity * product.price
     const {removeItem} = useCartContext();
     
     return (
         <tr>
-            <th scope="row">{producto.id}</th>
-            <td>{producto.name}</td>
-            <td>{producto.cantidad}</td>
-            <td>{producto.price}</td>
+            <th scope="row">{product.id}</th>
+            <td>{product.name}</td>
+            <td>{product.quantity}</td>
+            <td>{product.price}</td>
             <td>{subTotal}</td>
             <td>
-                <button type="button" className="btn btn-danger btn-sm m-2" onClick={()=>removeItem(producto.id)}>
+                <button type="button" className="btn btn-danger btn-sm m-2" onClick={()=>removeItem(product.id)}>
                     X
                 </button>
             </td>

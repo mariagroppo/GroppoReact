@@ -25,7 +25,7 @@ export default function ItemCount (props) {
         if (count>0) {
             setCount(0);
             setContador(count);
-            agregarItemAlCarrito( { ...props.producto, cantidad: count})
+            agregarItemAlCarrito( { ...props.product, quantity: count})
         }
     } 
     

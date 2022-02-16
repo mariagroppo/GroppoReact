@@ -28,8 +28,8 @@ export default function CartContextProvider({children}) {
         } else {
             let index = cartList.findIndex ( prod => prod.id === item.id) 
             /* console.log("REPETIDO. Ubicación: " + index) */
-            cartList[index].cantidad = cartList[index].cantidad + item.cantidad
-            swal("Producto ya agregado. Se sumaron " + item.cantidad + " unidades al carrito.");     
+            cartList[index].quantity = cartList[index].quantity + item.quantity
+            swal("Producto ya agregado. Se sumaron " + item.quantity + " unidades al carrito.");     
         } 
     }
 

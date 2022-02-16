@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import task from '../../data/DatosProductos';
+import { getFirestore, doc, getDoc} from 'firebase/firestore'
 import ItemDetail from '../ItemDetail/ItemDetail';
 
 
@@ -10,19 +10,22 @@ export default function ItemDetailContainer () {
 
     const { idProducto } = useParams()
 
-    useEffect ( ()=> {
-        if (idProducto) {
-            task()
-            .then (res=> setProductos(res.find(elemento => elemento.id===idProducto)))
+    useEffect ( () => {
+        
+        const db = getFirestore();
+        const dbItem = doc (db,"items", idProducto);
+        
+        getDoc(dbItem)
+            .then (res => setProductos( { id: res.id, ...res.data() } ))
             .catch (err => console.log(err))
             .finally ( ()=> setLoading(false))
-        }
-    }, [idProducto])
+        
+    }, [])
 
     return (
         <div>
             {loading ? <h2>Cargando...</h2>:
-                <ItemDetail producto={productos} />
+                <ItemDetail product={productos} />
             }
         </div>
     )
