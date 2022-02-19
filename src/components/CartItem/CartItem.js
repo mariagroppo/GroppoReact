@@ -7,8 +7,8 @@ export default function CartItem({product}) {
     
     return (
         <tr>
-            <th scope="row">{product.id}</th>
-            <td>{product.name}</td>
+            
+            <th scope="row">{product.name}</th>
             <td>{product.quantity}</td>
             <td>{product.price}</td>
             <td>{subTotal}</td>

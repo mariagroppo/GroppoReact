@@ -6,6 +6,7 @@ import Carousel from './components/Carousel/Carousel';
 import Cart from './components/Cart/Cart';
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 import CartContextProvider from './context/CartContext';
+import PurchaseOrder from './components/PurchaseOrder/PurchaseOrder';
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
             <Route exact path ='/productos/:idCategoria' element={<ContenedorProductos />} />
             <Route exact path ='/cart' element={<Cart />} />
             <Route exact path ='/detailContainer/:idProducto' element={<ItemDetailContainer />} />
-            
+            <Route exact path ='/purchaseOrder' element={<PurchaseOrder />} />
           </Routes>
         </div>
       </CartContextProvider>

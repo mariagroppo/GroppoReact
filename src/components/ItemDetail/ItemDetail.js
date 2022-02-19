@@ -5,9 +5,9 @@ import ItemCount from '../ItemCount/ItemCount';
 export default function ItemDetail ( {product}) {
     
     return (
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-sm-8">
+        <div className="container">
+            <div className="row align-items-center">
+                <div className="col-sm-8">
                     <div className='card m-3 shadow-lg'>
                         <div>
                             <div>
@@ -27,7 +27,7 @@ export default function ItemDetail ( {product}) {
                         
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div className="col-sm-4">
                     <Link to="/productos">
                         <button type="button" className="btn btn-success btn-sm my-3">
                             Volver al listado

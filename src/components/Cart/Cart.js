@@ -2,15 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCartContext } from '../../context/CartContext';
 import CartItem from '../CartItem/CartItem';
+import PurchaseOrder from '../PurchaseOrder/PurchaseOrder';
 
-export default function CartWidget () {
+export default function Cart () {
     
-    const {cartList, vaciarCarrito} = useCartContext();
+    const {cartList, emptyCart} = useCartContext();
     
     let total=0;
     cartList.map( (product) => {
         total=total + parseFloat(product.price * product.quantity)
     } )
+
+    function createPurchaseOrder () {
+        <PurchaseOrder/>
+    }
     
     return (
         <div>
@@ -33,7 +38,7 @@ export default function CartWidget () {
                             <table className="table">
                                 <thead>
                                     <tr>
-                                    <th scope="col">ID</th>
+                                    
                                     <th scope="col">Producto</th>
                                     <th scope="col">Cantidad</th>
                                     <th scope="col">Precio Unitario ($)</th>
@@ -57,9 +62,9 @@ export default function CartWidget () {
                         </div>
                         <div>
                             {/* Armar pagina de pago */}
-                            <Link to="/">
-                                <button type="button" className="btn btn-success btn-sm m-2">
-                                    Pagar
+                            <Link to="/purchaseOrder">
+                                <button type="button" className="btn btn-success btn-sm m-2" onClick={createPurchaseOrder}>
+                                    Crear orden de compra
                                 </button>
                             </Link>
                             <Link to="/productos">
@@ -68,7 +73,7 @@ export default function CartWidget () {
                                 </button>
                             </Link>
                             <Link to="/productos">
-                                <button type="button" className="btn btn-success btn-sm m-2" onClick={vaciarCarrito}>
+                                <button type="button" className="btn btn-success btn-sm m-2" onClick={emptyCart}>
                                     Vaciar carrito
                                 </button>
                             </Link>

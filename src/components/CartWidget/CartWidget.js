@@ -2,7 +2,7 @@ import React from 'react';
 import carrito from '../../img/carrito-de-supermercado.png'
 import { useCartContext } from '../../context/CartContext';
 
-export default function CartElements() {
+export default function CartWidget() {
     const {cartList} = useCartContext();
     
     let quantityElements=0;

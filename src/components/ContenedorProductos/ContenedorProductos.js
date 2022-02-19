@@ -29,13 +29,11 @@ export default function ContenedorProductos () {
     }, [idCategoria])
 
     return (
-        <ContextApp.Provider value={{prods}}>
-            <div className="d-flex flex-wrap justify-content-around">
-                {loading ? <h2 className="m-2 fs-5">Cargando...</h2>:
-                    <ItemList />
-                }
-            </div>
-        </ContextApp.Provider>
+        <div className="d-flex flex-wrap justify-content-around">
+            {loading ? <h2 className="m-2 fs-5">Cargando...</h2>:
+                <ItemList prods={prods}/>
+            }
+        </div>
     )
 }
 

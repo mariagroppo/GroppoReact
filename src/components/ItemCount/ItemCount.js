@@ -50,7 +50,6 @@ export default function ItemCount (props) {
                     Agregar al carrito
                 </button>
                 :
-                /* Despues del desafío, el boton que tiene que quedar es Agregar más al carrito... */
                 <div>
                     <Link to="/cart">
                         <button type="button" className="btn btn-success btn-sm my-3">

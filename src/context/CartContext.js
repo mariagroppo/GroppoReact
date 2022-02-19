@@ -21,19 +21,17 @@ export default function CartContextProvider({children}) {
         })
         
         if (condition) {
-            /* console.log(`NO REPETIDO. Se agregan ${count} unidades de ${props.producto.name} al carrito.`) */
             setCartList( [...cartList, item])
             swal("Producto agregado al carrito.")
             
         } else {
             let index = cartList.findIndex ( prod => prod.id === item.id) 
-            /* console.log("REPETIDO. Ubicación: " + index) */
             cartList[index].quantity = cartList[index].quantity + item.quantity
             swal("Producto ya agregado. Se sumaron " + item.quantity + " unidades al carrito.");     
         } 
     }
 
-    function vaciarCarrito () {
+    function emptyCart () {
         setCartList([]);
     }
 
@@ -47,7 +45,7 @@ export default function CartContextProvider({children}) {
     return <cartContext.Provider value={{
         cartList,
         agregarItemAlCarrito,
-        vaciarCarrito,
+        emptyCart,
         removeItem        
     }} >
             {children}

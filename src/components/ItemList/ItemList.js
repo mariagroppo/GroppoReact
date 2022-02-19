@@ -1,10 +1,8 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 import Item from "../Item/Item";
-import {ContextApp} from '../ContenedorProductos/ContenedorProductos'
 
-export default function ItemList () {
-    const {prods} = useContext(ContextApp);
+export default function ItemList ({prods}) {
     return (
         <div className="row d-flex flex-wrap justify-content-around">
             <div className="btn-group d-flex justify-content-center my-2" role="group" aria-label="Basic example">
