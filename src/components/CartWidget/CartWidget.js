@@ -10,7 +10,6 @@ export default function CartWidget() {
         quantityElements=quantityElements + product.quantity
     } )
 
-    /* let cantidadElementos = cartList.length */
     return (
         <div>
             <img src={carrito} alt="LogoTrent" width="40" height="40" className="d-inline-block align-text-top mx-3 position-relative"/>

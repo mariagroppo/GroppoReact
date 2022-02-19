@@ -25,9 +25,12 @@ export default function CartContextProvider({children}) {
             swal("Producto agregado al carrito.")
             
         } else {
-            let index = cartList.findIndex ( prod => prod.id === item.id) 
-            cartList[index].quantity = cartList[index].quantity + item.quantity
-            swal("Producto ya agregado. Se sumaron " + item.quantity + " unidades al carrito.");     
+            let newCartList = cartList;
+            let index = newCartList.findIndex ( prod => prod.id === item.id);
+            newCartList[index].quantity = newCartList[index].quantity + item.quantity;
+            setCartList( newCartList )
+            swal("Producto ya agregado. Se sumaron " + item.quantity + " unidades al carrito.");
+            
         } 
     }
 

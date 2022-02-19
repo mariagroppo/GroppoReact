@@ -12,7 +12,6 @@ export default function Item ( {product} ) {
                     <p className="card-text">${product.price}</p>
                 </div>
             </div>
-            {/* El producto.id se pone con bastic */}
             <Link to={ `/detailContainer/${product.id}` }>
                 <button type="button" className="btn btn-success btn-sm">
                     Detalle

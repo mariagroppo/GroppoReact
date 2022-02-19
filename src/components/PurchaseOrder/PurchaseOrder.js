@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useCartContext } from '../../context/CartContext';
 import swal from 'sweetalert';
 import { collection, getFirestore, addDoc} from 'firebase/firestore'
+import './PurchaseOrder.css'
+import { useState } from "react";
 
 export default function PurchaseOrder() {
     const {cartList, emptyCart} = useCartContext();
@@ -12,35 +14,54 @@ export default function PurchaseOrder() {
         total=total + parseFloat(product.price * product.quantity)
     } )
 
-    const executePurchase = async (e) => {
-        e.preventDefault();
-        let order = {};
-        order.buyer = {name:"Maria", email:"m@gmail.com", phone:"123456"};
-        order.total={total};
-        order.date=new Date();
-        order.items = cartList.map( (prod) => {
-            const id = prod.id;
-            const name = prod.name;
-            const price = prod.price;
-            const quantity = prod.quantity;
-            const sum = prod.price * prod.quantity;
-            return {
-                id,
-                name,
-                price,
-                quantity,
-                sum
-            }
+    const [clientData, setClientData] = useState({
+        clientName:"",
+        clientMail:"",
+        clientPhone:""
+    })
+
+    const handleInputChange = (e) => {
+        setClientData ({
+            ...clientData,
+            [e.target.name] : e.target.value
         })
-        console.log(order);
-        const db=getFirestore();
-        const ordersCollection = collection (db, 'orders');
-        await addDoc (ordersCollection, order)
-            .then (res => {
-                let purchaseCode = res.id
-                swal("Código de su compra: " + purchaseCode + ". Su pedido estará listo para ser retirado en 24hs.");
+    }
+
+    const executePurchase = async (e) => {
+        { cartList.length === 0 ? 
+            console.log("Carrito vacio.")
+        :
+            e.preventDefault();    
+            let order = {};
+            order.buyer = {name:clientData.clientName, email:clientData.clientMail, phone:clientData.clientPhone};
+            order.total={total};
+            order.date=new Date();
+            order.items = cartList.map( (prod) => {
+                const key = prod.id;
+                const id = prod.id;
+                const name = prod.name;
+                const price = prod.price;
+                const quantity = prod.quantity;
+                const sum = prod.price * prod.quantity;
+                return {
+                    id,
+                    name,
+                    price,
+                    quantity,
+                    sum
+                }
             })
-        emptyCart();
+            /* console.log(order); */
+            const db=getFirestore();
+            const ordersCollection = collection (db, 'orders');
+            await addDoc (ordersCollection, order)
+                .then (res => {
+                    let purchaseCode = res.id
+                    swal("Código de su compra: " + purchaseCode + ". Su pedido estará listo para ser retirado en 24hs.");
+                })
+            emptyCart();
+                        
+        }
     }
 
         /* ----------------------- Actualizacion de stock en Firebase ---------------------*/
@@ -63,6 +84,8 @@ export default function PurchaseOrder() {
         
     /* }
  */
+    
+
     return (
     <div>
         <div className="container">
@@ -70,16 +93,23 @@ export default function PurchaseOrder() {
             <div className="col">
                 <form className="row">
                     <div className="form-group col-sm-6">
-                        <label type="text" className="col-form-label">Cliente</label>
+                        <label type="text" className="col-form-label">Nombre completo</label>
                         <div>
-                            <input type="text" className="form-control" placeholder="Ingresa nombre cliente"/>
+                            <input type="text" className="form-control" name="clientName" placeholder="Ingresa nombre cliente" onChange={handleInputChange}/>
                             <small> *Por favor completar el campo.</small>
                         </div>
                     </div>
                     <div className="form-group col-sm-6">
                         <label type="email" className="col-form-label">Correo</label>
                         <div>
-                            <input type="email" className="form-control" id="correoLista" placeholder="Ingresa tu correo"/>
+                            <input type="email" className="form-control" name="clientMail" placeholder="Ingresa tu correo" onChange={handleInputChange}/>
+                            <small> *Por favor completar el campo.</small>
+                        </div>
+                    </div>
+                    <div className="form-group col-sm-6">
+                        <label type="email" className="col-form-label">Teléfono</label>
+                        <div>
+                            <input type="number" className="form-control" name="clientPhone" placeholder="Ingresa tu teléfono" onChange={handleInputChange}/>
                             <small> *Por favor completar el campo.</small>
                         </div>
                     </div>
@@ -96,7 +126,7 @@ export default function PurchaseOrder() {
                         </thead>
                         <tbody>
                             {cartList.map( (product) => 
-                                <tr>
+                                <tr key={product.id}>
                                     <th scope="row">{product.name}</th>
                                     <td>{product.quantity}</td>
                                     <td>{product.price}</td>

@@ -1,0 +1,8 @@
+small {
+    color: red;
+    display:none;
+}
+
+small.showName {
+    display:block;
+}
