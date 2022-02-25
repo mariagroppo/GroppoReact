@@ -3,12 +3,11 @@ import { useState } from 'react';
 import { useCartContext } from '../../context/CartContext';
 
 export default function ItemCount (props) {
-    const {cartList, agregarItemAlCarrito} = useCartContext();
+    const {cartList, agregarItemAlCarrito, quantityElementsCart} = useCartContext();
     const [count, setCount]=useState(props.initial)
-    const [contador, setContador]=useState(0)
     
     let value = false
-    cartList.map ( (prod) => {
+    cartList.forEach ( (prod) => {
         if (prod.id === props.product.id) {
             value=true
         }
@@ -31,9 +30,9 @@ export default function ItemCount (props) {
     function agregarCarrito () {
         if (count>0) {
             setCount(0);
-            setContador(count);
             agregarItemAlCarrito( { ...props.product, quantity: count})
             setInCart(true);
+            quantityElementsCart(count);
         }
     } 
     

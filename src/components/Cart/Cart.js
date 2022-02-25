@@ -9,7 +9,7 @@ export default function Cart () {
     const {cartList, emptyCart} = useCartContext();
     
     let total=0;
-    cartList.map( (product) => {
+    cartList.forEach( (product) => {
         total=total + parseFloat(product.price * product.quantity)
     } )
 

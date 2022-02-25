@@ -18,7 +18,15 @@ export default function Item ( {product} ) {
                 </button>
             </Link>
             <br/>
-            <ItemCount stock={product.stock} initial={0} product={product}/>
+            <div>
+                { product.stock === 0 ?
+                    <button type="button" className="btn btn-secondary btn-sm my-2">
+                        SIN STOCK
+                    </button>
+                :
+                <ItemCount stock={product.stock} initial={0} product={product}/>
+                }
+            </div>
             
         </div>
 )

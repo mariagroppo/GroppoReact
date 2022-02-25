@@ -2,15 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCartContext } from '../../context/CartContext';
 import swal from 'sweetalert';
-import { collection, getFirestore, addDoc} from 'firebase/firestore'
+import { collection, getFirestore, addDoc, query, documentId, getDocs, where, writeBatch} from 'firebase/firestore'
 import './PurchaseOrder.css'
 import { useState } from "react";
 
 export default function PurchaseOrder() {
     const {cartList, emptyCart} = useCartContext();
-    
+    const [paid, setPaid]=useState(false);
+    const [formStatus, setFormSatus] = useState(false);
+
     let total=0;
-    cartList.map( (product) => {
+    cartList.forEach( (product) => {
         total=total + parseFloat(product.price * product.quantity)
     } )
 
@@ -25,69 +27,75 @@ export default function PurchaseOrder() {
             ...clientData,
             [e.target.name] : e.target.value
         })
+        if (clientData.clientName.length > 0 && clientData.clientMail.length > 0 && clientData.clientPhone.length > 0) {
+            setFormSatus(true)
+        }        
+        
     }
-
+    
     const executePurchase = async (e) => {
-        { cartList.length === 0 ? 
+        cartList.length === 0 ? 
             console.log("Carrito vacio.")
         :
             e.preventDefault();    
-            let order = {};
-            order.buyer = {name:clientData.clientName, email:clientData.clientMail, phone:clientData.clientPhone};
-            order.total={total};
-            order.date=new Date();
-            order.items = cartList.map( (prod) => {
-                const key = prod.id;
-                const id = prod.id;
-                const name = prod.name;
-                const price = prod.price;
-                const quantity = prod.quantity;
-                const sum = prod.price * prod.quantity;
-                return {
-                    id,
-                    name,
-                    price,
-                    quantity,
-                    sum
-                }
-            })
-            /* console.log(order); */
-            const db=getFirestore();
-            const ordersCollection = collection (db, 'orders');
-            await addDoc (ordersCollection, order)
-                .then (res => {
-                    let purchaseCode = res.id
-                    swal("Código de su compra: " + purchaseCode + ". Su pedido estará listo para ser retirado en 24hs.");
+            if (formStatus === true) {
+                let order = {};
+                order.buyer = {name:clientData.clientName, email:clientData.clientMail, phone:clientData.clientPhone};
+                order.total={total};
+                order.date=new Date();
+                order.items = cartList.map( (prod) => {
+                    const id = prod.id;
+                    const name = prod.name;
+                    const price = prod.price;
+                    const quantity = prod.quantity;
+                    const sum = prod.price * prod.quantity;
+                    return {
+                        id,
+                        name,
+                        price,
+                        quantity,
+                        sum
+                    }
                 })
-            emptyCart();
-                        
-        }
-    }
-
-        /* ----------------------- Actualizacion de stock en Firebase ---------------------*/
-       /*  const queryCollection = collection (db, 'items')
-        
-        const updateStock = query (
-            queryCollection,
-            where ( documentId, "in", cartList.map ( (it) => it.id ) )
-        )
-        
-        const batch = writeBatch(db);
-        await getDocs(updateStock)
-            .then( resp => resp.docs.forEach( res => batch.update (res.ref, {
-                stock: res.data().stock - cartList.find( item => item.id === res.id).cantidad
-            } )) )
-            .catch (err => console.log(err))
-            .finally( () => console.log("Stock actualizado."))
-        batch.commit(); */
-        
-        
-    /* }
- */
+                const db=getFirestore();
+                const ordersCollection = collection (db, 'orders');
+                await addDoc (ordersCollection, order)
+                    .then (res => {
+                        let purchaseCode = res.id
+                        swal("Código de su compra: " + purchaseCode + ". Su pedido estará listo para ser retirado en 24hs.");
+                    });
+                emptyCart();
+                setPaid(true);
     
-
+                /* ----------------------- Actualizacion de stock en Firebase ---------------------*/
+                const queryCollection = collection (db, 'items')
+                const updateStock = query (
+                    queryCollection,
+                    where ( documentId(), "in", cartList.map ( it => it.id ) )
+                )
+                
+                const batch = writeBatch(db);
+                await getDocs(updateStock)
+                    .then( resp => resp.docs.forEach( res => batch.update (res.ref, {
+                        stock: res.data().stock - cartList.find( item => item.id === res.id).quantity
+                    } )) )
+                    .catch (err => console.log(err))
+                    .finally( () => console.log("Stock actualizado."))
+                batch.commit();
+            } else {
+                alert("Todos los campos deben estar completos.")
+            }
+    }
+    let sergio;
     return (
     <div>
+        { paid === true ?
+            <Link to="/">
+                <button type="button" className="btn btn-success btn-sm m-4 fs-3">
+                    Volver al inicio...
+                </button>
+            </Link>
+        :
         <div className="container">
             <h2 className="justify-content-center mb-3 my-3">Orden de compra</h2>
             <div className="col">
@@ -95,8 +103,8 @@ export default function PurchaseOrder() {
                     <div className="form-group col-sm-6">
                         <label type="text" className="col-form-label">Nombre completo</label>
                         <div>
-                            <input type="text" className="form-control" name="clientName" placeholder="Ingresa nombre cliente" onChange={handleInputChange}/>
-                            <small> *Por favor completar el campo.</small>
+                            <input type="text" className="form-control" name="clientName" placeholder="Ingresa tu nombre" onChange={handleInputChange}/>
+                            <small style={sergio}> *Por favor completar el campo (Máximo 30 caracteres.).</small>
                         </div>
                     </div>
                     <div className="form-group col-sm-6">
@@ -148,19 +156,17 @@ export default function PurchaseOrder() {
                             Seguir comprando
                         </button>
                     </Link>
-                    <Link to="/">
-                        <button type="button" className="btn btn-success btn-sm m-2" onClick={executePurchase}>
-                            Finalizar proceso.
-                        </button>
-                    </Link>
+                    <button type="button" className="btn btn-success btn-sm m-2" onClick={executePurchase}>
+                        Finalizar proceso.
+                    </button>
                 </div>
 
             </div>
 
             
-
+            
         </div>
-        
+        }
     </div>
   )
 }

@@ -20,7 +20,7 @@ export default function ItemDetailContainer () {
             .catch (err => console.log(err))
             .finally ( ()=> setLoading(false))
         
-    }, [])
+    }, [idProducto])
 
     return (
         <div>

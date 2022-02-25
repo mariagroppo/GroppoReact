@@ -8,6 +8,7 @@ export function useCartContext () {return useContext(cartContext)};
 export default function CartContextProvider({children}) {
   
     const [cartList, setCartList] = useState([]);
+    const [quantityElements, setQuantityElements] = useState(0)
 
     function agregarItemAlCarrito(item) {
                 
@@ -36,20 +37,32 @@ export default function CartContextProvider({children}) {
 
     function emptyCart () {
         setCartList([]);
+        setQuantityElements(0)
     }
 
     function removeItem (id) {
         const index = cartList.findIndex(item => item.id === id)
         if (index>=0) {
-            setCartList(cartList.filter((item => item.id !== id)))
+            /* setCartList(cartList.filter((item => item.id !== id))) */
+            let newCart=cartList.filter((item => item.id !== id));
+            setCartList(newCart)
+            let valor = 0;
+            newCart.map( i => valor = valor + i.quantity)
+            setQuantityElements(valor);
         }
     }
     
+    function quantityElementsCart (value) {
+        setQuantityElements(quantityElements+value)
+    }
+
     return <cartContext.Provider value={{
         cartList,
+        quantityElements,
         agregarItemAlCarrito,
         emptyCart,
-        removeItem        
+        removeItem,
+        quantityElementsCart        
     }} >
             {children}
         </cartContext.Provider>;

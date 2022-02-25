@@ -1,6 +1,6 @@
 small {
     color: red;
-    display:none;
+    /* display:none; */
 }
 
 small.showName {
