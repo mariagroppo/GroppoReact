@@ -1,6 +1,6 @@
-import React from 'react'
-import logo from '../../img/trentLogo.png'
-import {Link} from 'react-router-dom'
+import React from 'react';
+import logo from '../../img/trentLogo.png';
+import {Link} from 'react-router-dom';
 import CartWidget from '../CartWidget/CartWidget';
 
 const NavBar = () => {
@@ -37,7 +37,6 @@ const NavBar = () => {
                   </nav>
                 </div>
             </div>
-        
         </div>
     )
 }

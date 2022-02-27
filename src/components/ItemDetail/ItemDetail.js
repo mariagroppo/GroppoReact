@@ -24,7 +24,6 @@ export default function ItemDetail ( {product}) {
                                 <li className='list-group-item'>PRECIO: ${product.price}</li>
                             </ul>
                         </div>
-                        
                     </div>
                 </div>
                 <div className="col-sm-4">
@@ -45,7 +44,5 @@ export default function ItemDetail ( {product}) {
                 </div>
             </div>
         </div>
-
-    
-  );
+    );
 };

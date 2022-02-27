@@ -24,7 +24,6 @@ export default function ItemList ({prods}) {
                         Packs
                     </button>
                 </Link>
-                
             </div>
             <div>
                 { cartList.length === 0 ?
@@ -37,16 +36,11 @@ export default function ItemList ({prods}) {
                             </button>
                         </Link>
                     </div>
-
-                    
                 }
             </div>
             <div className="d-flex flex-wrap justify-content-around">
                 {prods.map( (product) => <Item key={product.id} product={product}/> )}
             </div>
-            
         </div>
-        
-        
     )
 }

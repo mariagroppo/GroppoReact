@@ -8,10 +8,9 @@ export const ContextApp = createContext();
 export default function ContenedorProductos () {
     const [prods, setProds] = useState([]);
     const [loading, setLoading]=useState(true);
-    const {idCategoria} = useParams()
+    const {idCategoria} = useParams();
     
     useEffect ( ()=> {
-        
         setLoading(true);
         const db = getFirestore()
         const dbCollection = collection (db,"items")
@@ -20,7 +19,6 @@ export default function ContenedorProductos () {
         :
             query(dbCollection, 
                 where('category', '==', idCategoria) )
-        
         getDocs(queryFiltro)
         .then (res=> setProds(res.docs.map(prod => ( {id: prod.id, ...prod.data()} ) )))
         .catch (err => console.log(err))

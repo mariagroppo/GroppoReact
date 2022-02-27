@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import ContenedorProductos from './components/ContenedorProductos/ContenedorProductos';
@@ -7,7 +7,6 @@ import Cart from './components/Cart/Cart';
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 import CartContextProvider from './context/CartContext';
 import PurchaseOrder from './components/PurchaseOrder/PurchaseOrder';
-
 
 function App() {
   return (
@@ -26,7 +25,6 @@ function App() {
         </div>
       </CartContextProvider>
     </BrowserRouter>
-    
   );
 }
 

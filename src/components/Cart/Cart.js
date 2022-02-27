@@ -61,7 +61,6 @@ export default function Cart () {
                             </table>
                         </div>
                         <div>
-                            {/* Armar pagina de pago */}
                             <Link to="/purchaseOrder">
                                 <button type="button" className="btn btn-success btn-sm m-2" onClick={createPurchaseOrder}>
                                     Crear orden de compra

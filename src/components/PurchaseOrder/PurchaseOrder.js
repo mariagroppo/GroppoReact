@@ -3,34 +3,50 @@ import { Link } from 'react-router-dom';
 import { useCartContext } from '../../context/CartContext';
 import swal from 'sweetalert';
 import { collection, getFirestore, addDoc, query, documentId, getDocs, where, writeBatch} from 'firebase/firestore'
-import './PurchaseOrder.css'
+import './PurchaseOrder.css';
 import { useState } from "react";
 
 export default function PurchaseOrder() {
     const {cartList, emptyCart} = useCartContext();
     const [paid, setPaid]=useState(false);
-    const [formStatus, setFormSatus] = useState(false);
-
-    let total=0;
-    cartList.forEach( (product) => {
-        total=total + parseFloat(product.price * product.quantity)
-    } )
-
     const [clientData, setClientData] = useState({
         clientName:"",
         clientMail:"",
         clientPhone:""
     })
-
+    const [nameValidation,setNameValidation] = useState(false);
+    const [phoneValidation,setPhoneValidation] = useState(false);
+    const [mailValidation,setMailValidation] = useState(false);
+    
+    let total=0;
+    cartList.forEach( (product) => {
+        total=total + parseFloat(product.price * product.quantity);
+    } )
+    
     const handleInputChange = (e) => {
         setClientData ({
             ...clientData,
             [e.target.name] : e.target.value
         })
-        if (clientData.clientName.length > 0 && clientData.clientMail.length > 0 && clientData.clientPhone.length > 0) {
-            setFormSatus(true)
-        }        
-        
+        if (e.target.name === "clientName") {
+            if (e.target.value.length > 0 && e.target.value.length < 30 ) {
+                setNameValidation(true);
+            } else {
+                setNameValidation(false);
+            }
+        } else if (e.target.name === "clientPhone") {
+            if (e.target.value.length >= 11 && e.target.value.length < 15 ) {
+                setPhoneValidation(true);
+            } else {
+                setPhoneValidation(false);
+            }
+        } else if (e.target.name === "clientMail") {
+            if (e.target.value.length > 5 && e.target.value.length < 30 ) {
+                setMailValidation(true);
+            } else {
+                setMailValidation(false);
+            }
+        }       
     }
     
     const executePurchase = async (e) => {
@@ -38,7 +54,7 @@ export default function PurchaseOrder() {
             console.log("Carrito vacio.")
         :
             e.preventDefault();    
-            if (formStatus === true) {
+            if (nameValidation === true && phoneValidation === true && mailValidation === true) {
                 let order = {};
                 order.buyer = {name:clientData.clientName, email:clientData.clientMail, phone:clientData.clientPhone};
                 order.total={total};
@@ -73,7 +89,6 @@ export default function PurchaseOrder() {
                     queryCollection,
                     where ( documentId(), "in", cartList.map ( it => it.id ) )
                 )
-                
                 const batch = writeBatch(db);
                 await getDocs(updateStock)
                     .then( resp => resp.docs.forEach( res => batch.update (res.ref, {
@@ -83,10 +98,9 @@ export default function PurchaseOrder() {
                     .finally( () => console.log("Stock actualizado."))
                 batch.commit();
             } else {
-                alert("Todos los campos deben estar completos.")
+                swal("Todos los campos deben estar correctamente completos.")
             }
     }
-    let sergio;
     return (
     <div>
         { paid === true ?
@@ -104,21 +118,21 @@ export default function PurchaseOrder() {
                         <label type="text" className="col-form-label">Nombre completo</label>
                         <div>
                             <input type="text" className="form-control" name="clientName" placeholder="Ingresa tu nombre" onChange={handleInputChange}/>
-                            <small style={sergio}> *Por favor completar el campo (Máximo 30 caracteres.).</small>
+                            <small className={` ${nameValidation === true ? 'DoNotShowName' : 'showName'}`}> *Por favor completar el campo (Máx. 30 caracteres.).</small>
+                        </div>
+                    </div>
+                    <div className="form-group col-sm-6">
+                        <label type="phone" className="col-form-label">Teléfono</label>
+                        <div>
+                            <input type="number" className="form-control" name="clientPhone" placeholder="Ingresa tu teléfono" onChange={handleInputChange}/>
+                            <small className={` ${phoneValidation === true ? 'DoNotShowPhone' : 'showPhone'}`}> *Por favor completar el campo (entre 11 y 15 caracteres).</small>
                         </div>
                     </div>
                     <div className="form-group col-sm-6">
                         <label type="email" className="col-form-label">Correo</label>
                         <div>
                             <input type="email" className="form-control" name="clientMail" placeholder="Ingresa tu correo" onChange={handleInputChange}/>
-                            <small> *Por favor completar el campo.</small>
-                        </div>
-                    </div>
-                    <div className="form-group col-sm-6">
-                        <label type="email" className="col-form-label">Teléfono</label>
-                        <div>
-                            <input type="number" className="form-control" name="clientPhone" placeholder="Ingresa tu teléfono" onChange={handleInputChange}/>
-                            <small> *Por favor completar el campo.</small>
+                            <small className={` ${mailValidation === true ? 'DoNotShowMail' : 'showMail'}`}> *Por favor completar el campo (Máx. 30 caracteres).</small>
                         </div>
                     </div>
                 </form>
@@ -129,7 +143,6 @@ export default function PurchaseOrder() {
                                 <th scope="col">Producto</th>
                                 <th scope="col">Cantidad</th>
                                 <th scope="col">Precio Unitario ($)</th>
-                                
                             </tr>
                         </thead>
                         <tbody>
@@ -160,11 +173,7 @@ export default function PurchaseOrder() {
                         Finalizar proceso.
                     </button>
                 </div>
-
             </div>
-
-            
-            
         </div>
         }
     </div>

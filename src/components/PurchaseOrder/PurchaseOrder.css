@@ -1,8 +1,23 @@
-small {
+.showName {
     color: red;
-    /* display:none; */
 }
 
-small.showName {
-    display:block;
+.DoNotShowName {
+    display:none;
+}
+
+.showPhone {
+    color: red;
+}
+
+.DoNotShowPhone {
+    display:none;
+}
+
+.showMail {
+    color: red;
+}
+
+.DoNotShowMail {
+    display:none;
 }
