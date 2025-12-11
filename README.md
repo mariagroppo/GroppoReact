@@ -1,4 +1,4 @@
-# 🚀 GroppoReact – Aplicación React con funcionalidades modernas
+# 🚀 Ecommerce – Aplicación React con funcionalidades modernas
 
 ## 🧠 Descripción general
 
